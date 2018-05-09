@@ -9,6 +9,18 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    fileprivate var headerView: UIView = {
+        var hv = UIView()
+        
+        return hv
+    }()
+    
+    fileprivate var descriptionView: UIView = {
+        var dv = UIView()
+        
+        return dv
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
