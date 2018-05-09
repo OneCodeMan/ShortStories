@@ -21,6 +21,12 @@ class ViewController: UIViewController {
         
         return dv
     }()
+    
+    fileprivate var storyTableView: UIView = {
+        var stv = UITableView()
+        
+        return stv
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
