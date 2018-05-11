@@ -10,6 +10,18 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let cellId = "cellId"
+    
+    // MARK:- Dummy data
+    
+    var stories = [
+        Story(title: "A Conversation With A Barber, During A Haircut, Is The Most Pointless Thing In The World", content: "Blah blah blah"),
+        Story(title: "Life And Video Games Are Full Of Bugs", content: "Blah blah blah"),
+        Story(title: "Farewell, Reaper", content: "Blah blah blah"),
+        Story(title: "Any Place With A Bunch Of Men Gathered Around Will Turn Into A Battlefield", content: "Blah blah blah")
+        
+    ]
+    
     // MARK:- Individual views
     
     fileprivate var headerView: UIView = {
@@ -63,10 +75,11 @@ class HomeViewController: UIViewController {
         
         print("View loaded")
         setupLayout()
+        setupTableView()
         
     }
     
-    // MARK:- Layout setup
+    // MARK:- Setting up the UI
     
     fileprivate func setupLayout() {
         
@@ -86,6 +99,7 @@ class HomeViewController: UIViewController {
         
         view.addSubview(storyTableView)
         storyTableView.delegate = self
+        storyTableView.dataSource = self
         
         storyTableView.translatesAutoresizingMaskIntoConstraints = false
         storyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -94,22 +108,34 @@ class HomeViewController: UIViewController {
         storyTableView.topAnchor.constraint(equalTo: descriptionView.bottomAnchor).isActive = true
         
     }
+    
+    fileprivate func setupTableView() {
+        let nib = UINib(nibName: "StoryCell", bundle: nil)
+        storyTableView.register(nib, forCellReuseIdentifier: cellId)
+    }
 
 }
 
-extension HomeViewController: UITableViewDelegate {
+// MARK:- UITableViewDelegate, UITableViewDataSource
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! StoryCell
+        
+        let story = stories[indexPath.row]
+        cell.story = story
+        
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stories.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 132
+    }
+    
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
