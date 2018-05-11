@@ -83,6 +83,8 @@ class HomeViewController: UIViewController {
     
     fileprivate func setupLayout() {
         
+        view.backgroundColor = .white
+    
         view.addSubview(headerView)
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
