@@ -42,7 +42,6 @@ class Story {
         self.theme = theme
     }
     
-    
 }
 
 
