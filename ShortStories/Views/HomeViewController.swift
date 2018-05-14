@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     // MARK:- Dummy data
     
     var stories = [
-        Story(title: "A Conversation With A Barber, During A Haircut, Is The Most Pointless Thing In The World", content: "Blah blah blah"),
+        Story(title: "A Conversation With A Barber, During A Haircut, Is The Most Pointless Thing In The World", content: Story2.content),
         Story(title: "Life And Video Games Are Full Of Bugs", content: "Blah blah blah"),
         Story(title: "Farewell, Reaper", content: "Blah blah blah"),
         Story(title: "Any Place With A Bunch Of Men Gathered Around Will Turn Into A Battlefield", content: "Blah blah blah")
