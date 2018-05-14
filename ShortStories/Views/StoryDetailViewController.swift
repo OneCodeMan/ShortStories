@@ -16,9 +16,41 @@ class StoryDetailViewController: UIViewController {
     var characterCount: Int?
     var estimatedReadingTime: Int?
     
+    let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        
+        return sv
+    }()
+    
+    let titleView: UIView = {
+        let tv = UIView()
+        
+        return tv
+    }()
+    
+    let contentView: UIView = {
+        let cv = UIView()
+        
+        return cv
+    }()
+    
+    let statisticsView: UIView = {
+        let stv = UIView()
+        
+        return stv
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        
+        setupLayout()
     }
+    
+    fileprivate func setupLayout() {
+        
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
 }
 
