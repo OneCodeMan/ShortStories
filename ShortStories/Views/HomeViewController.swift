@@ -83,6 +83,8 @@ class HomeViewController: UIViewController {
     
     fileprivate func setupLayout() {
         
+        view.backgroundColor = .white
+    
         view.addSubview(headerView)
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -131,6 +133,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected a story")
         
+        let destination = StoryDetailViewController()
+        destination.storyTitle = stories[indexPath.row].title
+        destination.content = stories[indexPath.row].content
+        destination.wordCount = stories[indexPath.row].wordCount
+        destination.characterCount = stories[indexPath.row].characterCount
+        destination.estimatedReadingTime = stories[indexPath.row].estimatedReadingTime
+        navigationController?.pushViewController(destination, animated: true)
         
     }
     
