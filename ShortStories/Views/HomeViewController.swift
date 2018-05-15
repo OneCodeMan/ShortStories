@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     // MARK:- Dummy data
     
     var stories = [
-        Story(title: "A Conversation With A Barber, During A Haircut, Is The Most Pointless Thing In The World", content: "Blah blah blah"),
+        Story(title: "A Conversation With A Barber, During A Haircut, Is The Most Pointless Thing In The World", content: Story2.content),
         Story(title: "Life And Video Games Are Full Of Bugs", content: "Blah blah blah"),
         Story(title: "Farewell, Reaper", content: "Blah blah blah"),
         Story(title: "Any Place With A Bunch Of Men Gathered Around Will Turn Into A Battlefield", content: "Blah blah blah")
@@ -57,7 +57,6 @@ class HomeViewController: UIViewController {
         storiesDescriptionLabel.sizeToFit()
         storiesDescriptionLabel.numberOfLines = 0
         storiesDescriptionLabel.font = UIFont(name: "Avenir", size: 16)
-        storiesDescriptionLabel.adjustsFontSizeToFitWidth = true
         
         return dv
     }()
@@ -84,20 +83,21 @@ class HomeViewController: UIViewController {
     fileprivate func setupLayout() {
         
         view.backgroundColor = .white
+        title = "Home"
     
         view.addSubview(headerView)
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        headerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
         
         view.addSubview(descriptionView)
         descriptionView.translatesAutoresizingMaskIntoConstraints = false
-        descriptionView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        descriptionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10).isActive = true
         descriptionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         descriptionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        descriptionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.17).isActive = true
+        descriptionView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
         view.addSubview(storyTableView)
         storyTableView.delegate = self

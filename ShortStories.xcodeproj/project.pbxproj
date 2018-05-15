@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16813D6420AA33D000DBB542 /* Story2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16813D6320AA33D000DBB542 /* Story2.swift */; };
 		16BBB76B20A39A0B006AABEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBB76A20A39A0B006AABEC /* AppDelegate.swift */; };
 		16BBB76D20A39A0B006AABEC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBB76C20A39A0B006AABEC /* HomeViewController.swift */; };
 		16BBB77020A39A0B006AABEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16BBB76E20A39A0B006AABEC /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		16813D6320AA33D000DBB542 /* Story2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story2.swift; sourceTree = "<group>"; };
 		16BBB76720A39A0B006AABEC /* ShortStories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShortStories.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16BBB76A20A39A0B006AABEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16BBB76C20A39A0B006AABEC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		16BBB79C20A39A64006AABEC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				16813D6320AA33D000DBB542 /* Story2.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16BBB7A920A3A8DB006AABEC /* Story1.swift in Sources */,
+				16813D6420AA33D000DBB542 /* Story2.swift in Sources */,
 				16BBB76D20A39A0B006AABEC /* HomeViewController.swift in Sources */,
 				16BBB76B20A39A0B006AABEC /* AppDelegate.swift in Sources */,
 				16BBB7A320A3A061006AABEC /* String.swift in Sources */,
@@ -521,7 +525,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = gumbad.ShortStories;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -536,7 +540,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = gumbad.ShortStories;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
