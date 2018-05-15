@@ -57,7 +57,6 @@ class HomeViewController: UIViewController {
         storiesDescriptionLabel.sizeToFit()
         storiesDescriptionLabel.numberOfLines = 0
         storiesDescriptionLabel.font = UIFont(name: "Avenir", size: 16)
-        storiesDescriptionLabel.adjustsFontSizeToFitWidth = true
         
         return dv
     }()
@@ -84,20 +83,21 @@ class HomeViewController: UIViewController {
     fileprivate func setupLayout() {
         
         view.backgroundColor = .white
+        title = "Home"
     
         view.addSubview(headerView)
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        headerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
         
         view.addSubview(descriptionView)
         descriptionView.translatesAutoresizingMaskIntoConstraints = false
-        descriptionView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        descriptionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10).isActive = true
         descriptionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         descriptionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        descriptionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.17).isActive = true
+        descriptionView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
         view.addSubview(storyTableView)
         storyTableView.delegate = self

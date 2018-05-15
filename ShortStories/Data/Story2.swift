@@ -112,5 +112,7 @@ class Story2 {
                     He cannot.
 
                     I am glad that I have extracted that answer, by the assistance of the court; nevertheless you swear in the indictment that I teach and believe in divine or spiritual agencies (new or old, no matter for that); at any rate, I believe in spiritual agencies, as you say and swear in the affidavit; but if I believe in divine beings, I must believe in spirits or demigods; - is not that true? Yes, that is true, for I may assume that your silence gives assent to that. Now what are spirits or demigods? are they not either gods or the sons of gods? Is that true?
+
+                    END OF TEXT
                   """
 }
