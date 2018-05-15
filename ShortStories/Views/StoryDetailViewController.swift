@@ -6,6 +6,8 @@
 //  Copyright © 2018 Dave's Organization. All rights reserved.
 //
 
+// Possible solution: https://stackoverflow.com/questions/29639598/swift-uitextview-with-different-formatting
+
 import UIKit
 
 class StoryDetailViewController: UIViewController {
@@ -45,7 +47,7 @@ class StoryDetailViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
-        setupTitle()
+        //setupTitle()
     }
     
     fileprivate func setupLayout() {
@@ -63,24 +65,34 @@ class StoryDetailViewController: UIViewController {
         scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         scrollView.backgroundColor = .white
         
-        titleView.translatesAutoresizingMaskIntoConstraints = false
-        titleView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 0).isActive = true
-        titleView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0).isActive = true
-        titleView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 0).isActive = true
-        titleView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 0.21).isActive = true
-        titleView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+//        titleView.translatesAutoresizingMaskIntoConstraints = false
+//        titleView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 0).isActive = true
+//        titleView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0).isActive = true
+//        titleView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 0).isActive = true
+//        titleView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 0.21).isActive = true
+//        titleView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
         scrollView.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        contentView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
         contentView.heightAnchor.constraint(equalToConstant: 2000).isActive = true
         
-        contentView.text = Story2.content
+        let storyString = "\n\(storyTitle ?? "")\n\n\n\(content ?? "")"
+        let attrText = NSMutableAttributedString(string: storyString)
+        
+        let titleFont = UIFont(name: "Avenir-Heavy", size: 24.0)!
+        let contentFont = UIFont(name: "Avenir", size: 18.0)!
+        
+        let titleTextRange = (storyString as NSString).range(of: storyTitle ?? "")
+        let contentTextRange = (storyString as NSString).range(of: content ?? "")
+        
+        attrText.addAttribute(NSAttributedStringKey.font, value: titleFont, range: titleTextRange)
+        attrText.addAttribute(NSAttributedStringKey.font, value: contentFont, range: contentTextRange)
+        
+        contentView.attributedText = attrText
         contentView.isEditable = false
-        
-        
         
     }
     
