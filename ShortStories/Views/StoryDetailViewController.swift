@@ -26,12 +26,40 @@ class StoryDetailViewController: UIViewController {
         let stv = UIVisualEffectView()
         let brightnessLabel = UILabel()
         
+        let brightnessItems = ["Light", "Dark"]
+        let brightnessToggle = UISegmentedControl(items: brightnessItems)
+        
+        let fontLabel = UILabel()
+        
+        let fontItems = ["Avenir", "Garamond"]
+        let fontToggle = UISegmentedControl(items: fontItems)
+        
         stv.contentView.addSubview(brightnessLabel)
         brightnessLabel.translatesAutoresizingMaskIntoConstraints = false
-        brightnessLabel.centerXAnchor.constraint(equalTo: stv.contentView.centerXAnchor).isActive = true
-        brightnessLabel.centerYAnchor.constraint(equalTo: stv.contentView.centerYAnchor).isActive = true
-        brightnessLabel.text = "Brightness"
-        brightnessLabel.font = UIFont(name: "Avenir", size: 14)
+        brightnessLabel.leadingAnchor.constraint(equalTo: stv.contentView.leadingAnchor, constant: 15).isActive = true
+        brightnessLabel.topAnchor.constraint(equalTo: stv.contentView.topAnchor, constant: 5).isActive = true
+        brightnessLabel.text = "Reading Mode"
+        brightnessLabel.font = UIFont(name: "Avenir-Medium", size: 16)
+        
+        stv.contentView.addSubview(brightnessToggle)
+        brightnessToggle.translatesAutoresizingMaskIntoConstraints = false
+        brightnessToggle.topAnchor.constraint(equalTo: brightnessLabel.bottomAnchor, constant: 5).isActive = true
+        brightnessToggle.leadingAnchor.constraint(equalTo: stv.contentView.leadingAnchor, constant: 17).isActive = true
+        brightnessToggle.selectedSegmentIndex = 0
+        
+        stv.contentView.addSubview(fontLabel)
+        fontLabel.translatesAutoresizingMaskIntoConstraints = false
+        fontLabel.trailingAnchor.constraint(equalTo: stv.contentView.trailingAnchor, constant: -130).isActive = true
+        fontLabel.topAnchor.constraint(equalTo: stv.contentView.topAnchor, constant: 5).isActive = true
+        fontLabel.text = "Font"
+        fontLabel.font = UIFont(name: "Avenir-Medium", size: 16)
+        
+        stv.contentView.addSubview(fontToggle)
+        fontToggle.translatesAutoresizingMaskIntoConstraints = false
+        fontToggle.topAnchor.constraint(equalTo: fontLabel.bottomAnchor, constant: 5).isActive = true
+        fontToggle.leadingAnchor.constraint(equalTo: brightnessToggle.trailingAnchor, constant: 60).isActive = true
+        fontToggle.selectedSegmentIndex = 0
+        
         
         return stv
     }()
@@ -44,14 +72,17 @@ class StoryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupLayout()
+        setupParentView()
+        setupContentView()
+        setupStatisticsView()
     }
     
-    fileprivate func setupLayout() {
-        
+    fileprivate func setupParentView() {
         title = storyTitle
         view.backgroundColor = .white
-        
+    }
+    
+    fileprivate func setupContentView() {
         view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
@@ -74,24 +105,27 @@ class StoryDetailViewController: UIViewController {
         contentView.attributedText = attrText
         contentView.isEditable = false
         contentView.showsVerticalScrollIndicator = false
-        
+    }
+    
+    fileprivate func setupStatisticsView() {
         view.addSubview(statisticsView)
         statisticsView.translatesAutoresizingMaskIntoConstraints = false
         statisticsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         statisticsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         statisticsView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         statisticsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.12).isActive = true
-        
         statisticsView.backgroundColor = .clear
-        let blurEffect = UIBlurEffect(style: .light)
+        
+        let blurEffect = UIBlurEffect(style: .prominent)
         let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.translatesAutoresizingMaskIntoConstraints = false
         statisticsView.contentView.insertSubview(blurView, at: 0)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
         blurView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         blurView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        
+
         
     }
+
 
 }
 
