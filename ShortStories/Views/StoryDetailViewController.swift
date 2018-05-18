@@ -22,43 +22,73 @@ class StoryDetailViewController: UIViewController {
         return cv
     }()
     
-    let statisticsView: UIVisualEffectView = {
-        let stv = UIVisualEffectView()
+    let brightnessToggleLabel: UILabel = {
+        let brightnessLabel = UILabel()
+        brightnessLabel.text = "Reading Mode"
+        brightnessLabel.font = UIFont(name: "Avenir-Medium", size: 16)
+        
+        return brightnessLabel
+    }()
+    
+    let brightnessToggleControl: UISegmentedControl = {
         let brightnessLabel = UILabel()
         
         let brightnessItems = ["Light", "Dark"]
         let brightnessToggle = UISegmentedControl(items: brightnessItems)
+        brightnessToggle.selectedSegmentIndex = 0
+        
+        brightnessToggle.addTarget(self, action: #selector(handleBrightnessChange), for: .valueChanged)
+        
+        return brightnessToggle
+    }()
+    
+    @objc func handleBrightnessChange() {
+        switch brightnessToggleControl.selectedSegmentIndex {
+        case 0:
+            navigationController?.navigationBar.barStyle = .default
+            navigationItem.backBarButtonItem?.tintColor = .black
+            navigationController?.navigationBar.tintColor = .white
+            view.backgroundColor = .white
+            contentView.backgroundColor = .white
+            contentView.textColor = .black
+            brightnessToggleLabel.textColor = .black
+            break
+        case 1:
+            navigationController?.navigationBar.barStyle = .black
+            navigationItem.backBarButtonItem?.tintColor = .white
+            navigationController?.navigationBar.backgroundColor = .white
+            navigationController?.navigationBar.tintColor = .black
+            view.backgroundColor = .black
+            contentView.backgroundColor = .black
+            contentView.textColor = .white
+            brightnessToggleLabel.textColor = .white
+            
+            break
+        default:
+            break
+        }
+    }
+    
+    let statisticsView: UIVisualEffectView = {
+        let stv = UIVisualEffectView()
         
         let fontLabel = UILabel()
         
         let fontItems = ["Avenir", "Garamond"]
         let fontToggle = UISegmentedControl(items: fontItems)
         
-        stv.contentView.addSubview(brightnessLabel)
-        brightnessLabel.translatesAutoresizingMaskIntoConstraints = false
-        brightnessLabel.leadingAnchor.constraint(equalTo: stv.contentView.leadingAnchor, constant: 15).isActive = true
-        brightnessLabel.topAnchor.constraint(equalTo: stv.contentView.topAnchor, constant: 5).isActive = true
-        brightnessLabel.text = "Reading Mode"
-        brightnessLabel.font = UIFont(name: "Avenir-Medium", size: 16)
-        
-        stv.contentView.addSubview(brightnessToggle)
-        brightnessToggle.translatesAutoresizingMaskIntoConstraints = false
-        brightnessToggle.topAnchor.constraint(equalTo: brightnessLabel.bottomAnchor, constant: 5).isActive = true
-        brightnessToggle.leadingAnchor.constraint(equalTo: stv.contentView.leadingAnchor, constant: 17).isActive = true
-        brightnessToggle.selectedSegmentIndex = 0
-        
-        stv.contentView.addSubview(fontLabel)
-        fontLabel.translatesAutoresizingMaskIntoConstraints = false
-        fontLabel.trailingAnchor.constraint(equalTo: stv.contentView.trailingAnchor, constant: -130).isActive = true
-        fontLabel.topAnchor.constraint(equalTo: stv.contentView.topAnchor, constant: 5).isActive = true
-        fontLabel.text = "Font"
-        fontLabel.font = UIFont(name: "Avenir-Medium", size: 16)
-        
-        stv.contentView.addSubview(fontToggle)
-        fontToggle.translatesAutoresizingMaskIntoConstraints = false
-        fontToggle.topAnchor.constraint(equalTo: fontLabel.bottomAnchor, constant: 5).isActive = true
-        fontToggle.leadingAnchor.constraint(equalTo: brightnessToggle.trailingAnchor, constant: 60).isActive = true
-        fontToggle.selectedSegmentIndex = 0
+//        stv.contentView.addSubview(fontLabel)
+//        fontLabel.translatesAutoresizingMaskIntoConstraints = false
+//        fontLabel.trailingAnchor.constraint(equalTo: stv.contentView.trailingAnchor, constant: -130).isActive = true
+//        fontLabel.topAnchor.constraint(equalTo: stv.contentView.topAnchor, constant: 5).isActive = true
+//        fontLabel.text = "Font"
+//        fontLabel.font = UIFont(name: "Avenir-Medium", size: 16)
+//
+//        stv.contentView.addSubview(fontToggle)
+//        fontToggle.translatesAutoresizingMaskIntoConstraints = false
+//        fontToggle.topAnchor.constraint(equalTo: fontLabel.bottomAnchor, constant: 5).isActive = true
+//        fontToggle.leadingAnchor.constraint(equalTo: brightnessToggle.trailingAnchor, constant: 60).isActive = true
+//        fontToggle.selectedSegmentIndex = 0
         
         
         return stv
@@ -122,6 +152,16 @@ class StoryDetailViewController: UIViewController {
         blurView.translatesAutoresizingMaskIntoConstraints = false
         blurView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         blurView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        
+        statisticsView.contentView.addSubview(brightnessToggleLabel)
+        brightnessToggleLabel.translatesAutoresizingMaskIntoConstraints = false
+        brightnessToggleLabel.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor, constant: 10).isActive = true
+        brightnessToggleLabel.topAnchor.constraint(equalTo: statisticsView.topAnchor, constant: 2).isActive = true
+        statisticsView.contentView.addSubview(brightnessToggleControl)
+        brightnessToggleControl.translatesAutoresizingMaskIntoConstraints = false
+        brightnessToggleControl.leadingAnchor.constraint(equalTo: statisticsView.contentView.leadingAnchor, constant: 10).isActive = true
+        brightnessToggleControl.topAnchor.constraint(equalTo: brightnessToggleLabel.bottomAnchor, constant: 2).isActive = true
 
         
     }
