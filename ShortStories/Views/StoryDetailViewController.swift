@@ -36,6 +36,7 @@ class StoryDetailViewController: UIViewController {
         let brightnessItems = ["Light", "Dark"]
         let brightnessToggle = UISegmentedControl(items: brightnessItems)
         brightnessToggle.selectedSegmentIndex = 0
+        brightnessToggle.tintColor = .black
         
         brightnessToggle.addTarget(self, action: #selector(handleBrightnessChange), for: .valueChanged)
         
@@ -47,29 +48,31 @@ class StoryDetailViewController: UIViewController {
         case 0:
             navigationController?.navigationBar.barStyle = .default
             navigationItem.backBarButtonItem?.tintColor = .black
-            navigationController?.navigationBar.tintColor = .white
+            navigationController?.navigationBar.backgroundColor = .white
+            navigationController?.navigationBar.tintColor = .black
             view.backgroundColor = .white
             contentView.backgroundColor = .white
             contentView.textColor = .black
             brightnessToggleLabel.textColor = .black
+            brightnessToggleControl.tintColor = .black
             break
         case 1:
             navigationController?.navigationBar.barStyle = .black
             navigationItem.backBarButtonItem?.tintColor = .white
-            navigationController?.navigationBar.backgroundColor = .white
-            navigationController?.navigationBar.tintColor = .black
+            navigationController?.navigationBar.backgroundColor = .black
+            navigationController?.navigationBar.tintColor = .white
             view.backgroundColor = .black
             contentView.backgroundColor = .black
             contentView.textColor = .white
             brightnessToggleLabel.textColor = .white
-            
+            brightnessToggleControl.tintColor = .white
             break
         default:
             break
         }
     }
     
-    let statisticsView: UIVisualEffectView = {
+    let toggleControlsView: UIVisualEffectView = {
         let stv = UIVisualEffectView()
         
         let fontLabel = UILabel()
@@ -94,6 +97,13 @@ class StoryDetailViewController: UIViewController {
         return stv
     }()
     
+    let blurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let bv = UIVisualEffectView(effect: blurEffect)
+        
+        return bv
+    }()
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         contentView.setContentOffset(CGPoint.zero, animated: false)
@@ -108,8 +118,22 @@ class StoryDetailViewController: UIViewController {
     }
     
     fileprivate func setupParentView() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(handleBackButtonClick))
+        self.navigationItem.leftBarButtonItem = newBackButton
+        
+        navigationItem.backBarButtonItem?.tintColor = .black
+        navigationController?.navigationBar.tintColor = .black
         title = storyTitle
         view.backgroundColor = .white
+    }
+    
+    @objc func handleBackButtonClick() {
+        navigationController?.navigationBar.barStyle = .default
+        navigationItem.backBarButtonItem?.tintColor = .black
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.popViewController(animated: true)
     }
     
     fileprivate func setupContentView() {
@@ -138,29 +162,26 @@ class StoryDetailViewController: UIViewController {
     }
     
     fileprivate func setupStatisticsView() {
-        view.addSubview(statisticsView)
-        statisticsView.translatesAutoresizingMaskIntoConstraints = false
-        statisticsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        statisticsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        statisticsView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        statisticsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.12).isActive = true
-        statisticsView.backgroundColor = .clear
+        view.addSubview(toggleControlsView)
+        toggleControlsView.translatesAutoresizingMaskIntoConstraints = false
+        toggleControlsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        toggleControlsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        toggleControlsView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        toggleControlsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.12).isActive = true
+        toggleControlsView.backgroundColor = .clear
         
-        let blurEffect = UIBlurEffect(style: .prominent)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        statisticsView.contentView.insertSubview(blurView, at: 0)
+        toggleControlsView.contentView.insertSubview(blurView, at: 0)
         blurView.translatesAutoresizingMaskIntoConstraints = false
         blurView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         blurView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         
-        
-        statisticsView.contentView.addSubview(brightnessToggleLabel)
+        toggleControlsView.contentView.addSubview(brightnessToggleLabel)
         brightnessToggleLabel.translatesAutoresizingMaskIntoConstraints = false
-        brightnessToggleLabel.leadingAnchor.constraint(equalTo: statisticsView.leadingAnchor, constant: 10).isActive = true
-        brightnessToggleLabel.topAnchor.constraint(equalTo: statisticsView.topAnchor, constant: 2).isActive = true
-        statisticsView.contentView.addSubview(brightnessToggleControl)
+        brightnessToggleLabel.leadingAnchor.constraint(equalTo: toggleControlsView.leadingAnchor, constant: 10).isActive = true
+        brightnessToggleLabel.topAnchor.constraint(equalTo: toggleControlsView.topAnchor, constant: 2).isActive = true
+        toggleControlsView.contentView.addSubview(brightnessToggleControl)
         brightnessToggleControl.translatesAutoresizingMaskIntoConstraints = false
-        brightnessToggleControl.leadingAnchor.constraint(equalTo: statisticsView.contentView.leadingAnchor, constant: 10).isActive = true
+        brightnessToggleControl.leadingAnchor.constraint(equalTo: toggleControlsView.contentView.leadingAnchor, constant: 10).isActive = true
         brightnessToggleControl.topAnchor.constraint(equalTo: brightnessToggleLabel.bottomAnchor, constant: 2).isActive = true
 
         
